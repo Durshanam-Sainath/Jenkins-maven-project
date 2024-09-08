@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+    environment {
+        x = '10'
+        y = '100'
+        z = '1000'
+        name = 'bob'
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'dev', credentialsId: 'github-creds', url: 'https://github.com/Durshanam-Sainath/mvn-webapp-project.git'
+            }
+        }
+        stage('printing env variables') {
+            steps {
+                echo "the value of x is $(x),y is $(y), z is $(z) and name is $(name)"
+            }
+        }
+        stage('validate') {
+            steps {
+                sh 'mvn validate'
+            }
+        }
+        stage('compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('deploy') {
+            steps {
+                echo 'deployment on stage environments'
+            }
+        }
+        stage('cleanws') {
+            steps {
+                cleanws()
+            }
+        }
+    }
+}
