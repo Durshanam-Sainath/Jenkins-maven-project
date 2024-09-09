@@ -14,7 +14,7 @@ pipeline {
         }
         stage('printing env variables') {
             steps {
-                echo "the value of x is $(x),y is $(y), z is $(z) and name is $(name)"
+                echo "the value of x is ${x},y is ${y}, z is ${z} and name is ${name}"
             }
         }
         stage('validate') {
